@@ -21,13 +21,13 @@ class Customer extends CI_Controller {
     }
     
     //list data customer
-    public function getCustomer(){
+    public function dataCustomer(){
         $id = $this->uri->segment(3);
         //get all data
         if($id==null){
             $customerData = $this->model_app->get('customer')->result_array();
         
-            //get by id
+        //get by id
         }else{
             $customerData = $this->model_app->get('customer',array('id'=>$id))->row_array();
         }
@@ -39,7 +39,7 @@ class Customer extends CI_Controller {
         $name = $this->input->post('name');
         $phone_number = $this->input->post('phone_number');
         $address = $this->input->post('address');
-        $adm_username = $this->input->post('adm_username');
+        $adm_username = $this->session->adm_name;
 
         $check_id = $this->db->get_where('customer', array('id'=>$id))->row_array();
         if($check_id){
@@ -49,8 +49,7 @@ class Customer extends CI_Controller {
                     'name'=> $name,
                     'phone_number'=> $phone_number,
                     'address'=> $address,
-                    'updated_by'=> $adm_username,
-                    'updated_at'=> date("Y-m-d h:i:sa"),
+                    'updated_by'=> $adm_username
                 );
                 $where= array('id'=>$id);
                 $this->model_app->update('customer',$data,$where);
@@ -70,7 +69,7 @@ class Customer extends CI_Controller {
     }
     
     //Hapus customer
-    public function deleteCustomer(){
+    public function hapusCustomer(){
         $id = $this->uri->segment(3); 
         $this->model_app->delete('customer', array('id'=>$id));
     }
