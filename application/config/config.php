@@ -39,6 +39,8 @@ $config['base_url'] = (isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERV
 */
 $config['index_page'] = '';
 
+$config['encrypt_key'] = 'nmsc encrypt secret key';
+
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
