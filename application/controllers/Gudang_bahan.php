@@ -41,7 +41,8 @@ class Gudang_bahan extends CI_Controller {
         $price = $this->input->post('price');
         $origin = $this->input->post('origin');
         $type = $this->input->post('type');
-        $adm_username = $this->session->adm_name; 
+        $brand = $this->input->post('brand');
+        $adm_username =  $this->session->ses_nama;
         
         //upload image
         $config['upload_path'] = 'temp/foto_bahan/';
@@ -51,6 +52,12 @@ class Gudang_bahan extends CI_Controller {
         $this->upload->do_upload('image');
         $image=$this->upload->data();
 
+        if($image['file_name']){
+            $imageData = $image['file_name'];
+        }else{
+            $imageData = 'https://res.cloudinary.com/bookingjasa/image/upload/v1600258429/jenis-bumbu-dapur_fluivz.jpg';
+        }
+
         $data = array(
             'ingrdnt_name' => $name, 
             'ingrdnt_unit' => $unit, 
@@ -58,23 +65,26 @@ class Gudang_bahan extends CI_Controller {
             'unit_price' => $price, 
             'ingrdnt_origin' => $origin, 
             'ingrdnt_type' => $type, 
-            'img_url' => $image['file_name'], 
+            'img_url' => $imageData,
+            'brand' => $brand, 
             'created_by' => $adm_username,
         );
-        
+        $this->session->set_flashdata('flash', 'Ditambah');
         $this->model_app->insert('ingredient',$data);
+        redirect(site_url('Welcome/DataBahan'));
     }
 
     //ubah data bahan
     public function ubahBahan(){
-        $id = $this->uri->segment(3);
+        $id = $this->input->post('id');
         $name = $this->input->post('name');
         $unit = $this->input->post('unit');
         $stock = str_replace(",",".",$this->input->post('stock'));
         $price = $this->input->post('price');
         $origin = $this->input->post('origin');
         $type = $this->input->post('type');
-        $adm_username = $this->session->adm_name;
+        $brand = $this->input->post('brand');
+        $adm_username =  $this->session->ses_nama;
         
         //upload image
         $config['upload_path'] = 'temp/foto_bahan/';
@@ -83,8 +93,13 @@ class Gudang_bahan extends CI_Controller {
         $this->load->library('upload', $config);
         $this->upload->do_upload('image');
         $image=$this->upload->data();
-
-
+        
+        if($image['file_name']){
+            $imageData = $image['file_name'];
+        }else{
+            $imageData = 'https://res.cloudinary.com/bookingjasa/image/upload/v1600258429/jenis-bumbu-dapur_fluivz.jpg';
+        }
+        
         $data = array(
             'ingrdnt_name' => $name, 
             'ingrdnt_unit' => $unit, 
@@ -92,16 +107,22 @@ class Gudang_bahan extends CI_Controller {
             'unit_price' => $price, 
             'ingrdnt_origin' => $origin, 
             'ingrdnt_type' => $type, 
-            'img_url' => $image['file_name'], 
+            'img_url' => $imageData, 
+            'brand' => $brand,
             'updated_by' => $adm_username
         );
-        
+
+        $this->session->set_flashdata('flash', 'Diubah');
         $this->model_app->update('ingredient',$data,array('id'=>$id));
+        redirect(site_url('Welcome/DataBahan'));
     }
 
     //Hapus data bahan
     public function hapusBahan(){
         $id = $this->uri->segment(3); 
         $this->model_app->delete('ingredient', array('id'=>$id));
+        $this->session->set_flashdata('flash', 'Dihapus');
+        
+        redirect(site_url('Welcome/DataBahan'));
     }
 }

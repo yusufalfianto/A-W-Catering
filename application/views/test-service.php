@@ -18,15 +18,16 @@
     <!-- <a href="<?php echo base_url(); ?>customer/dataCustomer/C00002">Get data</a> -->
 
     <!-- input bahan ---------------------------------------------------------------------------------->
-    <!-- <?php echo form_open_multipart('Gudang_bahan/tambahBahan');?>
+    <?php echo form_open_multipart('Gudang_bahan/tambahBahan');?>
     <input type="text" name="name" placeholder="name"><br>
     <input type="text" name="unit" placeholder="unit"><br>
     <input type="text" name="stock" placeholder="Stok"><br>
     <input type="text" name="price" placeholder="harga satuan"><br>
     <input type="text" name="origin" placeholder="asal"><br>
     <input type="text" name="type" placeholder="kategori"><br>
+    <input type="text" name="brand" placeholder="Merek"><br>
     <input type='file' name='image'><br>
-    <input type="submit" name="submit"> -->
+    <input type="submit" name="submit">
     
     <!-- edit bahan ---------------------------------------------------------------------------------->
     <!-- <?php echo form_open_multipart('Gudang_bahan/ubahBahan/8');?>

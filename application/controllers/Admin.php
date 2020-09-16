@@ -4,15 +4,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends CI_Controller {
 
 	public function index()
-	{      
-        // $this->load->view('test-service');
+	{     
+
+        $akses      = $this->session->userdata('masuk');
+        if($akses)
+        { 
+        $data['content'] = 'VDashboard';
+        }
+        else
+        {
+        $data['content'] = 'VLogin';
+        }
+        $this->load->view('VBackend', $data);
     }
 
     public function adminData(){
         $id = $this->uri->segment(3);
         //get all data
         if($id==null){
-            $adminData = $this->model_app->get('admin')->result_array();
+            $data['adminData'] = $this->model_app->get('admin')->result_array();
         //get by id
         }else{
             $adminData = $this->model_app->get('admin',array('id'=>$id))->row_array();    
@@ -36,7 +46,7 @@ class Admin extends CI_Controller {
         );
 
         $insertData = $this->model_app->insert('admin',$data);
-        $getID = $this->model_app->get('admin',$data)->row_array();
+        $getID = $this->model_app->get('admin',array('adm_email'=>$adm_email))->row_array();
 
         /*kode role halaman (pesanan = 1), (bhn_makanan = 2), (mnu_makanan = 3), (customer = 4)*/
         /*dari input radio button*/
@@ -49,10 +59,12 @@ class Admin extends CI_Controller {
             );
             $insertRole = $this->model_app->insert('admin_role',$roleData);
         }
+        $this->session->set_flashdata('flash', 'Ditambah');
+        redirect(site_url('Welcome/DataUser'));
     }
 
     public function ubahAdmin(){
-        $id = $this->uri->segment(3);
+        $id = $this->input->post('id');
         $adm_name = $this->input->post('name');
         $adm_email = $this->input->post('email');
         $adm_phone = $this->input->post('phone');
@@ -85,7 +97,7 @@ class Admin extends CI_Controller {
                     'admin_id'=> $id,
                     'role'=> $addRole[$j]
                 );
-                $insertRole = $this->model_app->insert('admin_role',$addData);
+                $insertRole = $this->model_app->updateData('admin_role','admin_id', $id, $addData);
             }
         }
         if($removeFromList!=null){
@@ -98,11 +110,15 @@ class Admin extends CI_Controller {
                 $insertRole = $this->model_app->delete('admin_role',$delData);
             }
         }
+        $this->session->set_flashdata('flash', 'Diubah');
+        redirect(site_url('Welcome/DataUser'));
     }
 
     public function deleteAdmin(){
         $id = $this->uri->segment(3);
         $this->model_app->delete('admin', array('id'=>$id));
         $this->model_app->delete('admin_role', array('admin_id'=>$id));
+        $this->session->set_flashdata('flash', 'Dhapus');
+        redirect(site_url('Welcome/DataUser'));
     }
 }

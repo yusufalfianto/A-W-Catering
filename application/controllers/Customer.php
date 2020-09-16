@@ -15,6 +15,7 @@ class Customer extends CI_Controller {
 		}	
 		else
 		{
+            $data['dataCustomer'] = $this->model_app->get('customer')->result_array();
 			$data['content'] = 'VCustomer';
 		}
 		$this->load->view('VBackend', $data);
@@ -25,21 +26,24 @@ class Customer extends CI_Controller {
         $id = $this->uri->segment(3);
         //get all data
         if($id==null){
-            $customerData = $this->model_app->get('customer')->result_array();
-        
+
+            $data['dataCustomer'] = $this->model_app->get('customer')->result_array();
+
         //get by id
         }else{
             $customerData = $this->model_app->get('customer',array('id'=>$id))->row_array();
         }
     }
 
+    
+
     //Tambah atau ubah data customer
     public function manageCustomer(){
-        $id = $this->input->post('id');
+        $id = $this->uri->segment(4);
         $name = $this->input->post('name');
         $phone_number = $this->input->post('phone_number');
         $address = $this->input->post('address');
-        $adm_username = $this->session->adm_name;
+        $adm_username =  $this->session->ses_nama;
 
         $check_id = $this->db->get_where('customer', array('id'=>$id))->row_array();
         if($check_id){
@@ -53,24 +57,30 @@ class Customer extends CI_Controller {
                 );
                 $where= array('id'=>$id);
                 $this->model_app->update('customer',$data,$where);
+                 $this->session->set_flashdata('flash','DiUpdate');
             }
             
         }else{
             //tambah customer baru
             $data = array(
-                'id'=> $id,
                 'name'=> $name,
                 'phone_number'=> $phone_number,
                 'address'=> $address,
                 'created_by'=> $adm_username
             );
             $this->model_app->insert('customer',$data);
+           $this->session->set_flashdata('flash','Ditambahkan');
+
         }
+            redirect(site_url('Welcome/DataCustomer'));
     }
     
     //Hapus customer
     public function hapusCustomer(){
         $id = $this->uri->segment(3); 
         $this->model_app->delete('customer', array('id'=>$id));
+         $this->session->set_flashdata('flash','DiHapus');
+
+         redirect(site_url('Welcome/DataCustomer'));
     }
 }
