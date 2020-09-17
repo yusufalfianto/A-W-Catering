@@ -18,7 +18,7 @@
     <!-- <a href="<?php echo base_url(); ?>customer/dataCustomer/C00002">Get data</a> -->
 
     <!-- input bahan ---------------------------------------------------------------------------------->
-    <?php echo form_open_multipart('Gudang_bahan/tambahBahan');?>
+    <!-- <?php echo form_open_multipart('Gudang_bahan/tambahBahan');?>
     <input type="text" name="name" placeholder="name"><br>
     <input type="text" name="unit" placeholder="unit"><br>
     <input type="text" name="stock" placeholder="Stok"><br>
@@ -27,7 +27,7 @@
     <input type="text" name="type" placeholder="kategori"><br>
     <input type="text" name="brand" placeholder="Merek"><br>
     <input type='file' name='image'><br>
-    <input type="submit" name="submit">
+    <input type="submit" name="submit"> -->
     
     <!-- edit bahan ---------------------------------------------------------------------------------->
     <!-- <?php echo form_open_multipart('Gudang_bahan/ubahBahan/8');?>
@@ -87,6 +87,68 @@
     <input type='file' name='image'><br>
     <input type="submit" name="submit"><br>
     <?php?> -->
+
+    <!-- tambah menu ------------------------------------------------------------------------------->
+    <!-- <?php echo form_open_multipart('Food_menu/tambahMenu');?>
+    <input type="text" name="menu_name" placeholder="nama"><br>
+    <input type="text" name="menu_type" placeholder="Tipe Makanan"><br>
+    <input type="text" name="menu_unit" placeholder="Satuan"><br>
+    <input type="text" name="price" placeholder="Price"><br>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="ingrdnt_id[]" placeholder="Id Bahan"><br>
+        <input type="text" name="ingrdnt_unit[]" placeholder="Satuan"><br>
+        <input type="text" name="ingrdnt_amount[]" placeholder="Takaran"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="ingrdnt_id[]" placeholder="Id Bahan"><br>
+        <input type="text" name="ingrdnt_unit[]" placeholder="Satuan"><br>
+        <input type="text" name="ingrdnt_amount[]" placeholder="Takaran"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="ingrdnt_id[]" placeholder="Id Bahan"><br>
+        <input type="text" name="ingrdnt_unit[]" placeholder="Satuan"><br>
+        <input type="text" name="ingrdnt_amount[]" placeholder="Takaran"><br>
+    </div>
+    <input type='file' name='image'><br>
+    <input type="submit" name="submit"> -->
+    
+    <!-- login ---------------------------------------------------------------------------------->
+    <!-- <form action="<?php echo base_url(); ?>Auth/login" method='POST'>
+        <h1>Login</h1>
+        <input type="text" name="email" placeholder="email"><br>
+        <input type="password" name="password" placeholder="password"><br>
+        <input type="submit" name="login" value="login">
+    </form> -->
+
+    <!-- update menu ------------------------------------------------------------------------------->
+    <!-- <?php echo form_open_multipart('Food_menu/ubahMenu/17');?>
+    <input type="text" name="menu_name" placeholder="nama"><br>
+    <input type="text" name="menu_type" placeholder="Tipe Makanan"><br>
+    <input type="text" name="menu_unit" placeholder="Satuan"><br>
+    <input type="text" name="price" placeholder="Price"><br>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="ingrdnt_id[]" placeholder="Id Bahan"><br>
+        <input type="text" name="ingrdnt_unit[]" placeholder="Satuan"><br>
+        <input type="text" name="ingrdnt_amount[]" placeholder="Takaran"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="ingrdnt_id[]" placeholder="Id Bahan"><br>
+        <input type="text" name="ingrdnt_unit[]" placeholder="Satuan"><br>
+        <input type="text" name="ingrdnt_amount[]" placeholder="Takaran"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="ingrdnt_id[]" placeholder="Id Bahan"><br>
+        <input type="text" name="ingrdnt_unit[]" placeholder="Satuan"><br>
+        <input type="text" name="ingrdnt_amount[]" placeholder="Takaran"><br>
+    </div>
+    <input type='file' name='image'><br>
+    <input type="submit" name="submit"> -->
+    
+    <!-- lupa password ---------------------------------------------------------------------------------->
+    <!-- <form action="<?php echo base_url(); ?>Auth/sendNewPassword" method='POST'>
+        <input type="text" name="email" placeholder="email"><br>
+        <input type="submit" name="login" value="kirim password">
+    </form> -->
     
     <!-- login ---------------------------------------------------------------------------------->
     <form action="<?php echo base_url(); ?>Auth/login" method='POST'>

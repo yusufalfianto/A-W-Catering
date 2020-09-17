@@ -35,7 +35,7 @@ class Admin extends CI_Controller {
         $role_name = $this->input->post('role_name');
         $password = hash("sha512", md5(strip_tags('password123'))); //default pass untuk admin baru 'password123'
         $adm_phone = $this->input->post('phone');
-        $image = 'https://res.cloudinary.com/bookingjasa/image/upload/v1599293855/Service%20Image/fvwcnumxgszgfmyni6tg.jpg'; //default image untuk admin 
+        $image = 'admin.png'; //default image untuk admin 
         $data = array(
             'adm_name' => $adm_name, 
             'adm_email' => $adm_email, 

@@ -55,7 +55,7 @@ class Gudang_bahan extends CI_Controller {
         if($image['file_name']){
             $imageData = $image['file_name'];
         }else{
-            $imageData = 'https://res.cloudinary.com/bookingjasa/image/upload/v1600258429/jenis-bumbu-dapur_fluivz.jpg';
+            $imageData = 'jenis-bumbu-dapur.jpg';
         }
 
         $data = array(
@@ -97,7 +97,7 @@ class Gudang_bahan extends CI_Controller {
         if($image['file_name']){
             $imageData = $image['file_name'];
         }else{
-            $imageData = 'https://res.cloudinary.com/bookingjasa/image/upload/v1600258429/jenis-bumbu-dapur_fluivz.jpg';
+            $imageData = 'jenis-bumbu-dapur.jpg';
         }
         
         $data = array(

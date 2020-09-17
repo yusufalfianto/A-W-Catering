@@ -34,7 +34,7 @@ class Profile extends CI_Controller {
         if($image['file_name']){
             $imageData = $image['file_name'];
         }else{
-            $imageData = 'https://res.cloudinary.com/bookingjasa/image/upload/v1599293855/Service%20Image/fvwcnumxgszgfmyni6tg.jpg';
+            $imageData = 'admin.png';
         }
 
         if($password){

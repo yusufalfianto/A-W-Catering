@@ -19,4 +19,8 @@ class Model_app extends CI_model{
     public function delete($table, $where){
         return $this->db->delete($table, $where);
     }
+    function UpdateData($tabel,$fieldid,$fieldvalue,$data=array())
+    {
+        $this->db->where($fieldid,$fieldvalue)->update($tabel,$data);
+    }
 }

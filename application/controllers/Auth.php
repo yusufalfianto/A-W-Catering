@@ -45,8 +45,49 @@ class Auth extends CI_Controller {
 
     public function ResetPassword()
     {
-       
         $this->load->view('VResetPass');
+    }
+
+    public function sendNewPassword()
+    {
+        $email = $this->input->post('email');
+        if($this->db->query("SELECT * FROM admin where adm_email='".$email."'")->row_array()){
+            $randomPass = uniqid(rand(), true);
+            $newPassword = hash("sha512", md5(strip_tags($randomPass)));
+            $updatePassword = $this->model_app->update('admin',array('adm_password'=>$newPassword),array('adm_email'=>$email));
+
+            echo $randomPass;
+            echo '<br>';
+            echo $newPassword;
+            // //send smtp
+            // $config = Array(        
+            //     'protocol' => 'smtp',
+            //     'smtp_host' => 'ssl://smtp.gmail.com',
+            //     'smtp_port' => 465,
+            //     'smtp_user' => 'notificationservice70@gmail.com',
+            //     'smtp_pass' => 'castleofwar1',
+            //     'smtp_timeout' => '4',
+            //     'mailtype'  => 'html', 
+            //     'charset'   => 'iso-8859-1'
+            // );
+            // $this->load->library('email', $config);
+            // $from_email = "notificationservice70@gmail.com"; 
+            // $this->email->from($from_email, 'System Notification');
+            // $this->email->to($email);
+            // $this->email->subject('Password Baru Admin');
+            // $message = "
+            //     <html>
+            //         <body>
+            //             <p style='color:black;'>Hallo admin, jangan khawatir!<br> Sekarang anda dapat masuk ke sistem menggunakan email dan password berikut: </p>
+            //             <p style='color:black; font-weight:600'>Email : $email</p>
+            //             <p style='color:black; font-weight:600'>Password : $randomPass</p>
+            //         </body>
+            //     </html>";         
+            // $this->email->message($message);
+            // $send = $this->email->send();
+        }else{
+            echo 'email tidak ditemukan';
+        }
     }
     
     public function logout(){
