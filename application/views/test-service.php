@@ -4,10 +4,10 @@
 <body>
     <!-- input/update customer ---------------------------------------------------------------------------------->
     <!-- <form action="<?php echo base_url(); ?>customer/manageCustomer" method='POST'>
-        <input type="text" name="id" placeholder="id"><br>
         <input type="text" name="name" placeholder="nama"><br>
         <input type="text" name="phone_number" placeholder="nomor telpon"><br>
         <input type="text" name="address" placeholder="alamat"><br>
+        <input type="text" name="type" placeholder="Tipe Customer"><br>
         <input type="submit" name="submit">
     </form> -->
 
@@ -149,14 +149,56 @@
         <input type="text" name="email" placeholder="email"><br>
         <input type="submit" name="login" value="kirim password">
     </form> -->
+
+    <!-- tambah Pesanan ---------------------------------------------------------------------------------->
+    <!-- <?php echo form_open_multipart('Pesanan/ubahPesanan/10');?>
+    <input type="text" name="customer_type" placeholder="Tipe customer"><br>
+    <input type="text" name="customer_id" placeholder="Id customer"><br>
+    <input type="text" name="address" placeholder="Alamat"><br>
+    <input type="text" name="phone" placeholder="Nomor telpon"><br>
+    <div style="display:flex; margin-right:50px;"> -->
+        <!-- <input type="date" name="from_date" placeholder="Tanggal dan waktu kirim"> -->
+        <!-- <p> TO </p> -->
+        <!-- <input type="date" name="to_date" placeholder="Tanggal dan waktu kirim"> -->
+        <!-- <input type="date" name="finish_date" placeholder="Tanggal dan waktu kirim">
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="menu_id[]" placeholder="Menu makanan"><br>
+        <input type="text" name="unit_price[]" placeholder="Harga satuan"><br>
+        <input type="text" name="menu_amount[]" placeholder="Jumlah porsi"><br>
+        <input type="text" name="sub_tot_price[]" placeholder="subtotal"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="menu_id[]" placeholder="Menu makanan"><br>
+        <input type="text" name="unit_price[]" placeholder="Harga satuan"><br>
+        <input type="text" name="menu_amount[]" placeholder="Jumlah porsi"><br>
+        <input type="text" name="sub_tot_price[]" placeholder="subtotal"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="menu_id[]" placeholder="Menu makanan"><br>
+        <input type="text" name="unit_price[]" placeholder="Harga satuan"><br>
+        <input type="text" name="menu_amount[]" placeholder="Jumlah porsi"><br>
+        <input type="text" name="sub_tot_price[]" placeholder="subtotal"><br>
+    </div>
+    <div style="display:flex; margin-right:50px;">
+        <input type="text" name="total_amount" placeholder="Total porsi"><br>
+        <input type="text" name="total_price" placeholder="Harga total"><br>
+    </div>
+    <input type="submit" name="submit"> -->
     
+    <!-- update status ---------------------------------------------------------------------------------->
+    <form action="<?php echo base_url(); ?>Pesanan/ubahStatus/2" method='POST'>
+        <input type="text" name="status" placeholder="status"><br>
+        <input type="submit" name="login">
+    </form>
+
     <!-- login ---------------------------------------------------------------------------------->
-    <form action="<?php echo base_url(); ?>Auth/login" method='POST'>
+    <!-- <form action="<?php echo base_url(); ?>Auth/login" method='POST'>
         <h1>Login</h1>
         <input type="text" name="email" placeholder="email"><br>
         <input type="password" name="password" placeholder="password"><br>
         <input type="submit" name="login" value="login">
-    </form>
+    </form> -->
              
     <!-- logout ---------------------------------------------------------------------------------->
     <br><br><br>

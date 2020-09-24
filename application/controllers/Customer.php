@@ -43,6 +43,7 @@ class Customer extends CI_Controller {
         $name = $this->input->post('name');
         $phone_number = $this->input->post('phone_number');
         $address = $this->input->post('address');
+        $type = $this->input->post('type');
         $adm_username =  $this->session->ses_nama;
 
         $check_id = $this->db->get_where('customer', array('id'=>$id))->row_array();
@@ -53,11 +54,12 @@ class Customer extends CI_Controller {
                     'name'=> $name,
                     'phone_number'=> $phone_number,
                     'address'=> $address,
+                    'type'=> $type,
                     'updated_by'=> $adm_username
                 );
                 $where= array('id'=>$id);
                 $this->model_app->update('customer',$data,$where);
-                 $this->session->set_flashdata('flash','DiUpdate');
+                $this->session->set_flashdata('flash','DiUpdate');
             }
             
         }else{
@@ -66,6 +68,7 @@ class Customer extends CI_Controller {
                 'name'=> $name,
                 'phone_number'=> $phone_number,
                 'address'=> $address,
+                'type'=> $type,
                 'created_by'=> $adm_username
             );
             $this->model_app->insert('customer',$data);
