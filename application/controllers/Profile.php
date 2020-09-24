@@ -32,26 +32,37 @@ class Profile extends CI_Controller {
         $image=$this->upload->data();
 
         if($image['file_name']){
-            $imageData = $image['file_name'];
+            if($password){
+                $data = array(
+                    'adm_name' => $adm_name, 
+                    'adm_email' => $adm_email, 
+                    'adm_password' => $password, 
+                    'adm_phone' => $adm_phone,  
+                    'img_url' => $image['file_name'],  
+                );
+            }else{
+                $data = array(
+                    'adm_name' => $adm_name, 
+                    'adm_email' => $adm_email,
+                    'adm_phone' => $adm_phone,  
+                    'img_url' => $image['file_name'],  
+                );
+            }
         }else{
-            $imageData = 'admin.png';
-        }
-
-        if($password){
-            $data = array(
-                'adm_name' => $adm_name, 
-                'adm_email' => $adm_email, 
-                'adm_password' => $password, 
-                'adm_phone' => $adm_phone,  
-                'img_url' => $imageData,  
-            );
-        }else{
-            $data = array(
-                'adm_name' => $adm_name, 
-                'adm_email' => $adm_email,
-                'adm_phone' => $adm_phone,  
-                'img_url' => $imageData,  
-            );
+            if($password){
+                $data = array(
+                    'adm_name' => $adm_name, 
+                    'adm_email' => $adm_email, 
+                    'adm_password' => $password, 
+                    'adm_phone' => $adm_phone  
+                );
+            }else{
+                $data = array(
+                    'adm_name' => $adm_name, 
+                    'adm_email' => $adm_email,
+                    'adm_phone' => $adm_phone  
+                );
+            }
         }
         
         $this->model_app->UpdateData('admin','id', $id, $data);

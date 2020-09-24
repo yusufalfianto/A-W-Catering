@@ -41,7 +41,7 @@ class Gudang_bahan extends CI_Controller {
         $price = $this->input->post('price');
         $origin = $this->input->post('origin');
         $type = $this->input->post('type');
-        $brand = $this->input->post('brand');
+        $merk = $this->input->post('merk');
         $adm_username =  $this->session->ses_nama;
         
         //upload image
@@ -66,7 +66,7 @@ class Gudang_bahan extends CI_Controller {
             'ingrdnt_origin' => $origin, 
             'ingrdnt_type' => $type, 
             'img_url' => $imageData,
-            'brand' => $brand, 
+            'brand' => $merk, 
             'created_by' => $adm_username,
         );
         $this->session->set_flashdata('flash', 'Ditambah');
@@ -83,7 +83,7 @@ class Gudang_bahan extends CI_Controller {
         $price = $this->input->post('price');
         $origin = $this->input->post('origin');
         $type = $this->input->post('type');
-        $brand = $this->input->post('brand');
+        $merk = $this->input->post('merk');
         $adm_username =  $this->session->ses_nama;
         
         //upload image
@@ -95,22 +95,29 @@ class Gudang_bahan extends CI_Controller {
         $image=$this->upload->data();
         
         if($image['file_name']){
-            $imageData = $image['file_name'];
+            $data = array(
+                'ingrdnt_name' => $name, 
+                'ingrdnt_unit' => $unit, 
+                'ingrdnt_stock' => $stock, 
+                'unit_price' => $price, 
+                'ingrdnt_origin' => $origin, 
+                'ingrdnt_type' => $type, 
+                'img_url' => $image['file_name'], 
+                'brand' => $merk,
+                'updated_by' => $adm_username
+            );
         }else{
-            $imageData = 'jenis-bumbu-dapur.jpg';
+            $data = array(
+                'ingrdnt_name' => $name, 
+                'ingrdnt_unit' => $unit, 
+                'ingrdnt_stock' => $stock, 
+                'unit_price' => $price, 
+                'ingrdnt_origin' => $origin, 
+                'ingrdnt_type' => $type, 
+                'brand' => $merk,
+                'updated_by' => $adm_username
+            );
         }
-        
-        $data = array(
-            'ingrdnt_name' => $name, 
-            'ingrdnt_unit' => $unit, 
-            'ingrdnt_stock' => $stock, 
-            'unit_price' => $price, 
-            'ingrdnt_origin' => $origin, 
-            'ingrdnt_type' => $type, 
-            'img_url' => $imageData, 
-            'brand' => $brand,
-            'updated_by' => $adm_username
-        );
 
         $this->session->set_flashdata('flash', 'Diubah');
         $this->model_app->update('ingredient',$data,array('id'=>$id));

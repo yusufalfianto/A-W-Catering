@@ -13,7 +13,7 @@ class Food_menu extends CI_Controller {
         $id = $this->uri->segment(3);
         if($id==null){
             //get all data
-            $getMenu = $this->model_app->get('food_menu')->result_array();
+            $data['getMenu'] = $this->model_app->get('food_menu')->result_array();
         }else{
             //get menu & bahan  by id
             $getMenu = $this->model_app->get('food_menu',array('id'=>$id))->row_array();   
@@ -24,6 +24,7 @@ class Food_menu extends CI_Controller {
             );
             return $detailMenu; 
         }
+        $this->load->view('VBackend', $data);
     }
 
     //hapus data menu
@@ -121,21 +122,25 @@ class Food_menu extends CI_Controller {
         $this->upload->do_upload('image');
         $image=$this->upload->data();
 
-        if($image['file_name']){
-            $imageData = $image['file_name'];
-        }else{
-            $imageData = 'menu_makanan.png';
-        }
-
         //upload menu
-        $data = array(
-            'name' => $menu_name, 
-            'menu_type' => $menu_type, 
-            'unit' => $menu_unit, 
-            'price' => $price, 
-            'img_url' => $imageData, 
-            'updated_by' => $adm_username, 
-        );
+        if($image['file_name']){
+            $data = array(
+                'name' => $menu_name, 
+                'menu_type' => $menu_type, 
+                'unit' => $menu_unit, 
+                'price' => $price, 
+                'img_url' => $image['file_name'], 
+                'updated_by' => $adm_username, 
+            );
+        }else{
+            $data = array(
+                'name' => $menu_name, 
+                'menu_type' => $menu_type, 
+                'unit' => $menu_unit, 
+                'price' => $price,  
+                'updated_by' => $adm_username, 
+            );
+        }
         
         $updateMenu = $this->model_app->update('food_menu',$data,array('id'=>$menuId));
         
