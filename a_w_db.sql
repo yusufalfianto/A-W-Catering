@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2020 at 06:19 PM
+-- Generation Time: Sep 26, 2020 at 03:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -99,7 +99,12 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id`, `name`, `phone_number`, `address`, `type`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
 (1, 'Ilham Kusuma Aji', '081211111111', 'Sentul, Kab. Bogor, Jawabarat', 'Individu', 'Super Admin', '2020-09-24 07:50:10', NULL, '2020-09-24 15:19:44'),
-(2, 'Yusuf Alfianto', '081233123312', 'Jl.Santai, Bandung, Jawabarat', 'Perusahaan', 'Super Admin', '2020-09-24 08:08:17', 'Super Admin', '2020-09-24 15:45:04');
+(2, 'Yusuf Alfianto', '081233123312', 'Jl.Santai, Bandung, Jawabarat', 'Perusahaan', 'Super Admin', '2020-09-24 08:08:17', 'Super Admin', '2020-09-24 15:45:04'),
+(5, 'Ahmad Jaenal', '081722222111', 'Kampung rambutan', 'Perorangan', 'Super Admin', '2020-09-26 12:54:17', NULL, '2020-09-26 12:54:17'),
+(6, 'Ahmad Jaenal', '081722222111', 'Kampung rambutan', 'Perorangan', 'Super Admin', '2020-09-26 12:54:45', NULL, '2020-09-26 12:54:45'),
+(7, 'Ahmad Jaenal', '081722222111', 'Kampung rambutan', 'Perorangan', 'Super Admin', '2020-09-26 12:55:34', NULL, '2020-09-26 12:55:34'),
+(8, 'Ahmad Jaenal', '081722222111', 'Kampung rambutan', 'Perorangan', 'Super Admin', '2020-09-26 12:58:37', NULL, '2020-09-26 12:58:37'),
+(9, 'Ahmad Jaenal', '081722222111', 'Kampung rambutan', 'Perorangan', 'Super Admin', '2020-09-26 13:00:14', NULL, '2020-09-26 13:00:14');
 
 -- --------------------------------------------------------
 
@@ -206,7 +211,7 @@ INSERT INTO `ingredient` (`id`, `ingrdnt_name`, `ingrdnt_unit`, `ingrdnt_stock`,
 (18, 'Wortel', 'kg', NULL, NULL, NULL, NULL, 'jenis-bumbu-dapur.jpg', NULL, 'Owner AW Catering', '2020-09-17 08:39:48', NULL, '2020-09-17 08:39:48'),
 (19, 'Kunyit', 'kg', 20, 15000, 'Pasar Bogor', 'sayur-sayuran', 'jenis-bumbu-dapur.jpg', '', 'Owner AW Catering', '2020-09-17 15:39:34', NULL, '2020-09-17 15:39:34'),
 (20, 'Toge', 'kg', 20, 12000, 'Pasar Cicurug', 'sayur-sayuran', 'jenis-bumbu-dapur.jpg', '', 'Owner AW Catering', '2020-09-17 15:43:33', NULL, '2020-09-17 15:43:33'),
-(21, 'Paprika', 'kg', 20, 120000, 'Lottemart Bogor', 'sayur-sayuran', 'jenis-bumbu-dapur.jpg', '', 'Owner AW Catering', '2020-09-21 11:36:39', NULL, '2020-09-21 11:36:39');
+(21, 'Paprikaa', 'kg', 20, 120000, 'Lottemart Bogor', 'sayur-sayuran', 'jenis-bumbu-dapur.jpg', '', 'Owner AW Catering', '2020-09-21 11:36:39', 'Super Admin', '2020-09-25 12:51:18');
 
 -- --------------------------------------------------------
 
@@ -215,7 +220,7 @@ INSERT INTO `ingredient` (`id`, `ingrdnt_name`, `ingrdnt_unit`, `ingrdnt_stock`,
 --
 
 CREATE TABLE `orders` (
-  `id` int(10) NOT NULL,
+  `order_id` int(10) NOT NULL,
   `custmr_id` varchar(10) NOT NULL,
   `order_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `finished_at` datetime DEFAULT NULL,
@@ -232,16 +237,23 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `custmr_id`, `order_at`, `finished_at`, `sum_price`, `sum_amount`, `status`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(2, '1', '2020-09-24 09:55:55', '2020-09-10 00:00:00', 15000000, 2000, 4, 'Super Admin', '2020-09-24 09:55:55', NULL, '2020-09-24 15:37:23'),
-(3, '1', '2020-09-24 09:58:52', '2020-09-10 00:00:00', 13000000, 1500, 1, 'Super Admin', '2020-09-24 09:58:52', NULL, '2020-09-24 09:58:52'),
-(4, '1', '2020-09-24 10:06:19', '2020-09-10 00:00:00', 21500000, 10000, 1, 'Super Admin', '2020-09-24 10:06:19', NULL, '2020-09-24 10:06:19'),
-(5, '1', '2020-09-24 12:20:20', '2020-09-22 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:20', NULL, '2020-09-24 12:20:20'),
-(6, '1', '2020-09-24 12:20:21', '2020-09-23 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-24 12:20:21'),
-(7, '1', '2020-09-24 12:20:21', '2020-09-24 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-24 12:20:21'),
-(8, '1', '2020-09-24 12:20:21', '2020-09-25 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-24 12:20:21'),
-(9, '1', '2020-09-24 12:20:21', '2020-09-26 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-24 12:20:21'),
-(11, '1', '2020-09-24 12:35:51', '2020-10-02 00:00:00', 2500000, 300, 1, 'Super Admin', '2020-09-24 12:35:51', NULL, '2020-09-24 12:35:51');
+INSERT INTO `orders` (`order_id`, `custmr_id`, `order_at`, `finished_at`, `sum_price`, `sum_amount`, `status`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(2, '1', '2020-09-24 09:55:55', '2020-09-10 00:00:00', 15000000, 2000, 3, 'Super Admin', '2020-09-24 09:55:55', NULL, '2020-09-25 13:02:01'),
+(3, '1', '2020-09-24 09:58:52', '2020-09-10 00:00:00', 13000000, 1500, 1, 'Super Admin', '2020-09-24 09:58:52', NULL, '2020-09-25 12:43:17'),
+(4, '1', '2020-09-24 10:06:19', '2020-09-10 00:00:00', 21500000, 10000, 1, 'Super Admin', '2020-09-24 10:06:19', NULL, '2020-09-25 12:43:22'),
+(5, '1', '2020-09-24 12:20:20', '2020-09-22 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:20', NULL, '2020-09-25 12:43:25'),
+(6, '1', '2020-09-24 12:20:21', '2020-09-23 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-25 12:43:30'),
+(7, '1', '2020-09-24 12:20:21', '2020-09-24 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-25 12:43:35'),
+(8, '1', '2020-09-24 12:20:21', '2020-09-25 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-25 12:44:18'),
+(9, '1', '2020-09-24 12:20:21', '2020-09-26 00:00:00', 15000000, 2500, 1, 'Super Admin', '2020-09-24 12:20:21', NULL, '2020-09-25 12:44:23'),
+(11, '1', '2020-09-24 12:35:51', '2020-10-02 00:00:00', 2500000, 300, 1, 'Super Admin', '2020-09-24 12:35:51', NULL, '2020-09-25 12:44:27'),
+(15, '9', '2020-09-26 13:00:15', '2020-09-24 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:15', NULL, '2020-09-26 13:00:15'),
+(16, '9', '2020-09-26 13:00:15', '2020-09-25 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:15', NULL, '2020-09-26 13:00:15'),
+(17, '9', '2020-09-26 13:00:15', '2020-09-26 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:15', NULL, '2020-09-26 13:00:15'),
+(18, '9', '2020-09-26 13:00:15', '2020-09-27 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:15', NULL, '2020-09-26 13:00:15'),
+(19, '9', '2020-09-26 13:00:15', '2020-09-28 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:15', NULL, '2020-09-26 13:00:15'),
+(20, '9', '2020-09-26 13:00:15', '2020-09-29 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:15', NULL, '2020-09-26 13:00:15'),
+(21, '9', '2020-09-26 13:00:16', '2020-09-30 00:00:00', 3250000, 450, 1, 'Super Admin', '2020-09-26 13:00:16', NULL, '2020-09-26 13:00:16');
 
 -- --------------------------------------------------------
 
@@ -266,7 +278,28 @@ CREATE TABLE `order_detail` (
 INSERT INTO `order_detail` (`id`, `order_id`, `menu_id`, `sum_amount`, `sum_price`, `created_at`, `updated_at`) VALUES
 (4, 11, 4, 100, 500000, '0000-00-00 00:00:00', NULL),
 (5, 11, 10, 100, 500000, '0000-00-00 00:00:00', NULL),
-(6, 11, 13, 100, 1500000, '0000-00-00 00:00:00', NULL);
+(6, 11, 13, 100, 1500000, '0000-00-00 00:00:00', NULL),
+(14, 15, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(15, 15, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(16, 15, 4, 150, 750000, '0000-00-00 00:00:00', NULL),
+(17, 16, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(18, 16, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(19, 16, 4, 150, 750000, '0000-00-00 00:00:00', NULL),
+(20, 17, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(21, 17, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(22, 17, 4, 150, 750000, '0000-00-00 00:00:00', NULL),
+(23, 18, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(24, 18, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(25, 18, 4, 150, 750000, '0000-00-00 00:00:00', NULL),
+(26, 19, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(27, 19, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(28, 19, 4, 150, 750000, '0000-00-00 00:00:00', NULL),
+(29, 20, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(30, 20, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(31, 20, 4, 150, 750000, '0000-00-00 00:00:00', NULL),
+(32, 21, 13, 100, 500000, '0000-00-00 00:00:00', NULL),
+(33, 21, 10, 200, 2000000, '0000-00-00 00:00:00', NULL),
+(34, 21, 4, 150, 750000, '0000-00-00 00:00:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -312,7 +345,7 @@ ALTER TABLE `ingredient`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `order_detail`
@@ -340,7 +373,7 @@ ALTER TABLE `admin_role`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `food_menu`
@@ -364,13 +397,13 @@ ALTER TABLE `ingredient`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

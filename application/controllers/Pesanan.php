@@ -12,7 +12,7 @@ class Pesanan extends CI_Controller {
     public function ubahStatus(){
         $id = $this->uri->segment(3);
         $status = $this->input->post('status'); // 1 = order masuk, 2 = order diproses, 3 = order dikirim, 4 = order selesai
-        $this->model_app->update('orders',array('status'=>$status),array('id'=>$id));
+        $this->model_app->update('orders',array('status'=>$status),array('order_id'=>$id));
     }
 
     //list data menu
@@ -24,7 +24,7 @@ class Pesanan extends CI_Controller {
             var_dump($data);
         }else{
             //get Order & Menu order  by id
-            $getOrder = $this->model_app->get('orders',array('id'=>$id))->row_array();   
+            $getOrder = $this->model_app->get('orders',array('order_id'=>$id))->row_array();   
             $getOrderMenu = $this->model_app->get('order_detail',array('order_id'=>$id))->result_array();   
             $detailMenu=array(
                 'Order'=> $getOrder,
@@ -38,7 +38,7 @@ class Pesanan extends CI_Controller {
     //hapus data menu
     public function hapusPesanan(){
         $id = $this->uri->segment(3);
-        $this->model_app->delete('orders', array('id'=>$id));
+        $this->model_app->delete('orders', array('order_id'=>$id));
         $this->model_app->delete('order_detail', array('order_id'=>$id));
     }
 
@@ -46,6 +46,7 @@ class Pesanan extends CI_Controller {
 	{      
         $cstmr_type = $this->input->post('customer_type');  //value tipe customer
         $cstmr_id = $this->input->post('customer_id');      //value customer id
+        $cstmr_name = $this->input->post('customer_name');      //value customer id
         $cstmr_address = $this->input->post('address');     //value customer address
         $cstmr_phone = $this->input->post('phone');         //value customer phone
         $from_date = $this->input->post('from_date');       //value kirim dari tanggal
@@ -58,6 +59,7 @@ class Pesanan extends CI_Controller {
         $adm_username =  $this->session->ses_nama;
 
         $check_id = $this->db->get_where('customer', array('id'=>$cstmr_id))->row_array();
+        $range_of_dates = range(strtotime($from_date), strtotime($to_date),86400);
         if($check_id){
             //cek alamat & nomor telpon
             if($check_id['address']!=$cstmr_address||$check_id['phone_number']!=$cstmr_phone){
@@ -67,8 +69,6 @@ class Pesanan extends CI_Controller {
                 );
                 $this->model_app->update('customer',$data,array('id'=>$cstmr_id));
             }
-
-            $range_of_dates = range(strtotime($from_date), strtotime($to_date),86400);
             
             //upload order
             for($j=0;$j<count($range_of_dates);$j++){
@@ -81,12 +81,12 @@ class Pesanan extends CI_Controller {
                     'created_by' => $adm_username, 
                 );
                 $insertOrder = $this->model_app->insert('orders',$orders);
-                $orderId = $this->db->query("SELECT id from orders ORDER BY id DESC LIMIT 1")->row_array();
+                $orderId = $this->db->query("SELECT order_id from orders ORDER BY order_id DESC LIMIT 1")->row_array();
             
                 //upload detail menu order
                 for ($k=0;$k<count($menu_id);$k++){
                     $detailMenuOrder = array(
-                        'order_id'=> $orderId["id"],
+                        'order_id'=> $orderId["order_id"],
                         'menu_id'=> $menu_id[$k],
                         'sum_amount'=> $menu_amount[$k],
                         'sum_price'=> $sub_price[$k],
@@ -97,7 +97,41 @@ class Pesanan extends CI_Controller {
 
 
         }else{
-            echo "customer not found";
+            //upload customer baru
+            $userData = array(
+                'name'=> $cstmr_name,
+                'phone_number'=> $cstmr_phone,
+                'address'=> $cstmr_address,
+                'type'=> $cstmr_type,
+                'created_by'=> $adm_username
+            );
+            $this->model_app->insert('customer',$userData);
+            $new_custmr_id = $this->db->query("SELECT id from customer ORDER BY id DESC LIMIT 1")->row_array();
+            
+            //upload order
+            for($j=0;$j<count($range_of_dates);$j++){
+                $orders = array(
+                    'custmr_id' => $new_custmr_id["id"], 
+                    'finished_at' => date('Y-m-d H:i:s', $range_of_dates[$j]), 
+                    'sum_price' => $total_price, 
+                    'sum_amount' => $total_amount, 
+                    'status' => 1, 
+                    'created_by' => $adm_username, 
+                );
+                $insertOrder = $this->model_app->insert('orders',$orders);
+                $orderId = $this->db->query("SELECT order_id from orders ORDER BY order_id DESC LIMIT 1")->row_array();
+            
+                //upload detail menu order
+                for ($k=0;$k<count($menu_id);$k++){
+                    $detailMenuOrder = array(
+                        'order_id'=> $orderId["order_id"],
+                        'menu_id'=> $menu_id[$k],
+                        'sum_amount'=> $menu_amount[$k],
+                        'sum_price'=> $sub_price[$k],
+                    );
+                    $insertDetailOrder = $this->model_app->insert('order_detail',$detailMenuOrder);
+                }
+            }
         }
     }
     
