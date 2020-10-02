@@ -151,18 +151,18 @@
     </form> -->
 
     <!-- tambah Pesanan ---------------------------------------------------------------------------------->
-    <?php echo form_open_multipart('Pesanan/tambahPesanan');?>
+    <!-- <?php echo form_open_multipart('Pesanan/tambahPesanan');?>
     <input type="text" name="customer_type" placeholder="Tipe customer"><br>
     <input type="text" name="customer_id" placeholder="Id customer"><br>
     <input type="text" name="customer_name" placeholder="Nama customer"><br>
     <input type="text" name="address" placeholder="Alamat"><br>
     <input type="text" name="phone" placeholder="Nomor telpon"><br>
-    <div style="display:flex; margin-right:50px;"> -->
+    <div style="display:flex; margin-right:50px;">
         <input type="date" name="from_date" placeholder="Tanggal dan waktu kirim">
         <p> TO </p>
-        <input type="date" name="to_date" placeholder="Tanggal dan waktu kirim">
+        <input type="date" name="to_date" placeholder="Tanggal dan waktu kirim"> -->
         <!-- <input type="date" name="finish_date" placeholder="Tanggal dan waktu kirim"> -->
-    </div>
+    <!-- </div>
     <div style="display:flex; margin-right:50px;">
         <input type="text" name="menu_id[]" placeholder="Menu makanan"><br>
         <input type="text" name="unit_price[]" placeholder="Harga satuan"><br>
@@ -185,7 +185,7 @@
         <input type="text" name="total_amount" placeholder="Total porsi"><br>
         <input type="text" name="total_price" placeholder="Harga total"><br>
     </div>
-    <input type="submit" name="submit">
+    <input type="submit" name="submit"> -->
     
     <!-- update status ---------------------------------------------------------------------------------->
     <!-- <form action="<?php echo base_url(); ?>Pesanan/ubahStatus/2" method='POST'>
@@ -200,6 +200,13 @@
         <input type="password" name="password" placeholder="password"><br>
         <input type="submit" name="login" value="login">
     </form> -->
+
+    <form action="<?php echo base_url(); ?>Filter/pesanan" method='POST'>
+        <input type="text" name="order-time" placeholder="waktu order"><br>
+        <input type="text" name="pick-time" placeholder="waktu ambil"><br>
+        <input type="text" name="status" placeholder="status"><br>
+        <input type="submit">
+    </form>
              
     <!-- logout ---------------------------------------------------------------------------------->
     <br><br><br>
